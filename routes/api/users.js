@@ -11,6 +11,7 @@ const validateLoginInput = require("../../validation/login");
 
 // Load User model
 const User = require("../../models/User");
+const Post = require("../../models/Posts");
 
 // @route POST api/users/register
 // @desc Register user
@@ -103,6 +104,15 @@ router.post("/login", (req, res) => {
           .json({ passwordincorrect: "Password incorrect" });
       }
     });
+  });
+});
+
+router.post("/posts", (req, res) => {
+  console.log("post");
+  const newPost = new Post({
+    title: req.body.title,
+    description: req.body.description,
+    status: req.body.status,
   });
 });
 

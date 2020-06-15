@@ -1,22 +1,36 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import CreateModal from '../dashboard/CreateModal';
 
 class Navbar extends Component {
   render() {
-    return (
+    const { user } = this.props.auth;
+    return (     
       <div className="navbar-fixed">
-        <nav className="z-depth-0">
-          <div className="nav-wrapper white">
+        <nav className="nav-wrapper white">
+          <div className="container">
+            
             <Link
-              to="/"
+              to="/dashboard"
               style={{
                 fontFamily: "monospace",
+                
               }}
-              className="col s5 brand-logo center black-text"
+              className="col s5 brand-logo left black-text"
             >
-              <i className="material-icons">code</i>
-              MERN
+              Home
             </Link>
+            
+            <ul className="right">
+              <li>
+                <CreateModal />
+              </li>
+              <li>
+                <button className='btn btn-floating gray lighten-1'>{user.name.charAt(0)}</button>
+              </li>
+            </ul>
           </div>
         </nav>
       </div>
@@ -24,4 +38,13 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+Navbar.propTypes = {
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps)(Navbar);
+

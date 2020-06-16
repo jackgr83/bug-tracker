@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
     .then((bugs) => res.json(bugs));
 });
 
-// @route POST api/bugs
+// @route POST api/bugs/create
 // @desc  Create A Bug
 // @access Private
 router.post("/create", (req, res) => {
@@ -26,12 +26,25 @@ router.post("/create", (req, res) => {
   newBug.save().then((bug) => res.json(bug));
 });
 
-// @route DELETE api/bugs/:id
+// @route DELETE api/bugs/delete/:id
 // @desc  Delete A Bug
 // @access Private
 router.delete("/delete/:id", (req, res) => {
   Bug.findById(req.params.id)
     .then((bug) => bug.remove().then(() => res.json({ success: true })))
+    .catch((err) => res.status(404).json({ success: false }));
+});
+
+// @route patch api/bugs/update/:id
+// @desc  Update A Bug
+// @access Private
+router.patch("/update/:id", (req, res) => {
+  Bug.findById(req.params.id)
+    .then((bug) =>
+      bug
+        .update({ $set: { name: req.body.name } })
+        .then(() => res.json({ success: true }))
+    )
     .catch((err) => res.status(404).json({ success: false }));
 });
 

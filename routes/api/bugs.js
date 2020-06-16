@@ -21,6 +21,7 @@ router.post("/create", (req, res) => {
     name: req.body.name,
     description: req.body.description,
     status: req.body.status,
+    priority: req.body.priority,
   });
 
   newBug.save().then((bug) => res.json(bug));
@@ -69,6 +70,19 @@ router.patch("/update/status/:id", (req, res) => {
     .then((bug) =>
       bug
         .updateOne({ $set: { status: req.body.status } })
+        .then(() => res.json({ success: true }))
+    )
+    .catch((err) => res.status(404).json({ success: false }));
+});
+
+// @route patch api/bugs/update/priority/:id
+// @desc  Update A Bug priority
+// @access Private
+router.patch("/update/priority/:id", (req, res) => {
+  Bug.findById(req.params.id)
+    .then((bug) =>
+      bug
+        .updateOne({ $set: { priority: req.body.priority } })
         .then(() => res.json({ success: true }))
     )
     .catch((err) => res.status(404).json({ success: false }));

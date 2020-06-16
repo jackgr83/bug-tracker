@@ -7,6 +7,14 @@ const BugSchema = new Schema({
     type: String,
     required: true,
   },
+  description: {
+    type: String,
+    required: true,
+  },
+  status: {
+    type: String,
+    required: true,
+  },
   date: {
     type: Date,
     default: Date.now,

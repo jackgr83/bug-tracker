@@ -36,56 +36,24 @@ router.delete("/delete/:id", (req, res) => {
     .catch((err) => res.status(404).json({ success: false }));
 });
 
-// @route patch api/bugs/update/name/:id
-// @desc  Update A Bug Name
+// @route patch api/bugs/edit/:id
+// @desc  Update A Bug
 // @access Private
-router.patch("/update/name/:id", (req, res) => {
-  Bug.findById(req.params.id)
-    .then((bug) =>
-      bug
-        .updateOne({ $set: { name: req.body.name } })
-        .then(() => res.json({ success: true }))
-    )
-    .catch((err) => res.status(404).json({ success: false }));
-});
 
-// @route patch api/bugs/update/description/:id
-// @desc  Update A Bug description
-// @access Private
-router.patch("/update/description/:id", (req, res) => {
-  Bug.findById(req.params.id)
-    .then((bug) =>
-      bug
-        .updateOne({ $set: { description: req.body.description } })
-        .then(() => res.json({ success: true }))
-    )
-    .catch((err) => res.status(404).json({ success: false }));
-});
-
-// @route patch api/bugs/update/status/:id
-// @desc  Update A Bug Status
-// @access Private
-router.patch("/update/status/:id", (req, res) => {
-  Bug.findById(req.params.id)
-    .then((bug) =>
-      bug
-        .updateOne({ $set: { status: req.body.status } })
-        .then(() => res.json({ success: true }))
-    )
-    .catch((err) => res.status(404).json({ success: false }));
-});
-
-// @route patch api/bugs/update/priority/:id
-// @desc  Update A Bug priority
-// @access Private
-router.patch("/update/priority/:id", (req, res) => {
-  Bug.findById(req.params.id)
-    .then((bug) =>
-      bug
-        .updateOne({ $set: { priority: req.body.priority } })
-        .then(() => res.json({ success: true }))
-    )
-    .catch((err) => res.status(404).json({ success: false }));
+router.patch("/edit/:id", (req, res) => {
+  Bug.findById(req.params.id).then((bug) =>
+    bug
+      .update({
+        $set: {
+          name: req.body.name,
+          description: req.body.description,
+          status: req.body.status,
+          priority: req.body.priority,
+        },
+      })
+      .then(() => res.json({ success: true }))
+      .catch((err) => res.status(404).json({ success: false }))
+  );
 });
 
 module.exports = router;

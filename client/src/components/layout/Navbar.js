@@ -9,7 +9,10 @@ class Navbar extends Component {
     return (
       <nav>
         <div className="nav-wrapper">
-          <a href="#!" class="brand-logo">
+          <a href="#!" class="brand-logo left">
+            <i class="material-icons">dehaze</i>
+          </a>
+          <a href="#!" class="brand-logo center">
             <i class="material-icons">cloud</i>BugTracker
           </a>
           <ul className="right hide-on-med-and-down">
@@ -28,11 +31,7 @@ class Navbar extends Component {
                 <i className="material-icons">refresh</i>
               </a>
             </li>
-            <li>
-              <a href="mobile.html">
-                <i className="material-icons">more_vert</i>
-              </a>
-            </li>
+            <li></li>
           </ul>
         </div>
       </nav>

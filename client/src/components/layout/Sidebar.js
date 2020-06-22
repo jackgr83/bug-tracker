@@ -14,6 +14,7 @@ export default class Sidebar extends Component {
         </a>
 
         <a className="menu-item" href="/pizzas">
+          <i class="material-icons">bug_report</i>
           Bugs
         </a>
 

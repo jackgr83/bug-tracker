@@ -13,7 +13,7 @@ class Navbar extends Component {
             <i class="material-icons">dehaze</i>
           </a>
           <a href="#!" class="brand-logo center">
-            <i class="material-icons">cloud</i>BugTracker
+            <i class="material-icons">bug_report</i>BugTracker
           </a>
           <ul className="right hide-on-med-and-down">
             <li>

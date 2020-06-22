@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import Navbar from "../layout/Navbar";
 import Sidebar from "../layout/Sidebar";
+import Board from "../dashboard/Board";
 
 import BugList from "./BugList";
 
@@ -21,7 +22,7 @@ class Dashboard extends Component {
     return (
       <div className="dashboard">
         <Navbar />
-        <Sidebar />
+        <Board />
         <div style={{ height: "75vh" }} className="container valign-wrapper">
           <div className="row">
             <div className="landing-copy col s12 center-align">

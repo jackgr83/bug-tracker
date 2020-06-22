@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import Navbar from "../layout/Navbar";
-import BugList from './BugList';
+import Sidebar from "../layout/Sidebar";
+
+import BugList from "./BugList";
 
 class Dashboard extends Component {
   onLogoutClick = (e) => {
@@ -19,10 +21,11 @@ class Dashboard extends Component {
     return (
       <div className="dashboard">
         <Navbar />
+        <Sidebar />
         <div style={{ height: "75vh" }} className="container valign-wrapper">
           <div className="row">
             <div className="landing-copy col s12 center-align">
-            <BugList bugs={bugs}/>
+              <BugList bugs={bugs} />
               <button
                 style={{
                   width: "150px",

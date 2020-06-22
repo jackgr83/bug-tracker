@@ -2,49 +2,42 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import CreateModal from '../dashboard/CreateModal';
+import CreateModal from "../dashboard/CreateModal";
 
 class Navbar extends Component {
   render() {
-    const { user } = this.props.auth;
-    return (     
-      <div className="navbar-fixed">
-        <nav className="nav-wrapper white">
-          <div className="container">
-            
-            <Link
-              to="/dashboard"
-              style={{
-                fontFamily: "monospace",
-                
-              }}
-              className="col s5 brand-logo left black-text"
-            >
-              Home
-            </Link>
-            
-            <ul className="right">
-              <li>
-                <CreateModal />
-              </li>
-              <li>
-                <button className='btn btn-floating gray lighten-1'>{user.name.charAt(0)}</button>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </div>
+    return (
+      <nav>
+        <div className="nav-wrapper">
+          <a href="#!" class="brand-logo">
+            <i class="material-icons">cloud</i>BugTracker
+          </a>
+          <ul className="right hide-on-med-and-down">
+            <li>
+              <a href="sass.html">
+                <i className="material-icons">search</i>
+              </a>
+            </li>
+            <li>
+              <a href="badges.html">
+                <i className="material-icons">view_module</i>
+              </a>
+            </li>
+            <li>
+              <a href="collapsible.html">
+                <i className="material-icons">refresh</i>
+              </a>
+            </li>
+            <li>
+              <a href="mobile.html">
+                <i className="material-icons">more_vert</i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
     );
   }
 }
 
-Navbar.propTypes = {
-  auth: PropTypes.object.isRequired
-};
-
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-});
-
-export default connect(mapStateToProps)(Navbar);
-
+export default Navbar;

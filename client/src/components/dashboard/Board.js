@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-
+import axios from "axios";
 // fake data generator
 const getItems = (count) =>
   Array.from({ length: count }, (v, k) => k).map((k) => ({
@@ -26,8 +26,10 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   padding: grid * 2,
   margin: `0 0 ${grid}px 0`,
 
+  height: 100,
+
   // change background colour if dragging
-  background: isDragging ? "lightgreen" : "grey",
+  background: isDragging ? "lightgreen" : "white",
 
   // styles we need to apply on draggables
   ...draggableStyle,
@@ -36,7 +38,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 const getListStyle = (isDraggingOver) => ({
   background: isDraggingOver ? "lightblue" : "lightgrey",
   padding: grid,
-  width: 250,
+  width: 280,
 });
 
 class Board extends Component {

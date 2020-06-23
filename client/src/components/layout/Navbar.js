@@ -10,10 +10,8 @@ class Navbar extends Component {
     return (
       <nav>
         <div className="nav-wrapper">
-          <a href="#!" class="brand-logo left">
-            <i class="material-icons">dehaze</i>
-            <Sidebar></Sidebar>
-          </a>
+          <Sidebar />
+
           <a href="#!" class="brand-logo center">
             <i class="material-icons">bug_report</i>BugTracker
           </a>

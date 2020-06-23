@@ -1,27 +1,30 @@
 import React, { Component } from "react";
-import { slide as Menu } from "react-burger-menu";
+import { push as Menu } from "react-burger-menu";
 
-export default class Sidebar extends Component {
+class Sidebar extends Component {
+  showSettings(event) {
+    event.preventDefault();
+  }
+
   render() {
+    // NOTE: You also need to provide styles, see https://github.com/negomi/react-burger-menu#styling
     return (
       <Menu>
-        <a className="menu-item" href="/">
-          Account
+        <a id="home" className="menu-item" href="/">
+          Profile
         </a>
-
-        <a className="menu-item" href="/burgers">
-          Projects
+        <a id="about" className="menu-item" href="/board">
+          Board
         </a>
-
-        <a className="menu-item" href="/pizzas">
-          <i class="material-icons">bug_report</i>
-          Bugs
+        <a id="contact" className="menu-item" href="/contact">
+          Contact
         </a>
-
-        <a className="menu-item" href="/desserts">
-          Logout
+        <a onClick={this.showSettings} className="menu-item--small" href="">
+          Project Settings
         </a>
       </Menu>
     );
   }
 }
+
+export default Sidebar;

@@ -21,7 +21,7 @@ class Dashboard extends Component {
     return (
       <div className="dashboard">
         <Navbar />
-        <Sidebar />
+        {/* <Sidebar /> */}
         <div style={{ height: "75vh" }} className="container valign-wrapper">
           <div className="row">
             <div className="landing-copy col s12 center-align">

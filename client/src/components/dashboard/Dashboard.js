@@ -22,7 +22,7 @@ class Dashboard extends Component {
     return (
       <div className="dashboard">
         <Switch>
-          <Navbar />
+          <Navbar user={user}/>
 
           <Route exact path="/board" exact component={Board} />
         </Switch>

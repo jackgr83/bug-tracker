@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import axios from "axios";
+import Navbar from "../layout/Navbar";
 // fake data generator
 const getItems = (count) =>
   Array.from({ length: count }, (v, k) => k).map((k) => ({
@@ -70,7 +73,15 @@ class Board extends Component {
   // Normally you would want to split things out into separate components.
   // But in this example everything is just done in one place for simplicity
   render() {
+    const { user } = this.props.auth;
+
     return (
+      
+      
+      <div>
+
+      <Navbar user={user}/>
+      
       <DragDropContext onDragEnd={this.onDragEnd}>
         <Droppable droppableId="droppable">
           {(provided, snapshot) => (
@@ -101,8 +112,19 @@ class Board extends Component {
           )}
         </Droppable>
       </DragDropContext>
+
+      </div>
+      
     );
   }
 }
 
-export default Board;
+Board.propTypes = {
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps)(Board);

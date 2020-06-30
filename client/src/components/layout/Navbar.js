@@ -17,7 +17,7 @@ class Navbar extends Component {
           </a>
           <ul className="right hide-on-med-and-down">
             <li>
-              <i className="material-icons">{this.props.user.name.charAt(0)}</i>
+              {/* <i className="material-icons">{this.props.user.name.charAt(0)}</i> */}
             </li>
             <li>
               <a href="sass.html">

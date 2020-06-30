@@ -10,7 +10,9 @@ import {
 } from "reactstrap";
 import Modal from "react-modal";
 import { connect } from "react-redux";
-import { createBug } from "../../actions/bugActions";
+import axios from 'axios';
+import { getBugs, postBug } from '../../actions/bugActions';
+// import { createBug } from "../../actions/bugActions";
 // import { addItem } from '../actions/ItemActions';
 // import PropTypes from 'prop-types';
 Modal.setAppElement("#root");
@@ -35,9 +37,37 @@ class CreateModal extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  onSubmit = (e) => {
+  onSubmit = e => {
     e.preventDefault();
-    this.props.createBug(this.state);
+    
+    const bugItem = {
+        name: this.state.name
+    }
+
+    console.log(this.state.name);
+    if(this.state.name.length > 0){
+        axios
+        .post("/api/bugs/create", {
+            name: this.state.name,
+            description: this.state.name,
+            status: this.state.name,
+            priority: this.state.name,
+        })
+        .then(
+            (response) => {
+            console.log(response);
+            },
+            (error) => {
+            console.log(error);
+            }
+        );
+
+    }
+    
+    this.props.getBugs(bugItem);
+    this.state.name = '';
+    // this.props.postBug(this.state.name);
+
     // const newItem = {
     //     name: this.state.name
     // }
@@ -47,7 +77,7 @@ class CreateModal extends Component {
 
     // Close modal
     this.toggle();
-  };
+  }
 
   render() {
     return (
@@ -92,9 +122,9 @@ class CreateModal extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createBug: (bug) => dispatch(createBug(bug)),
-  };
-};
+      getBugs: (bug) => dispatch(getBugs(bug))
+  }
+}
 
 const mapStateToProps = (state) => ({
   item: state.item,

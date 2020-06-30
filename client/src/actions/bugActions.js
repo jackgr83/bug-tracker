@@ -1,9 +1,12 @@
 import axios from "axios";
-import { CREATE_BUG } from "./types";
+import { GET_BUGS } from "./types";
 
-export const createBug = (bug) => {
+export const getBugs = (bug) => {
   return (dispatch, getState) => {
-    axios.get("/api/bugs").then((res) => dispatch({ type: "CREATE_BUG", bug }));
-    // make async call to database
-  };
+      axios
+          .get('/api/bugs')
+          .then(bug => dispatch({ type: GET_BUGS, payload: bug.data }));
+      // make async call to database
+      
+  }
 };

@@ -5,9 +5,12 @@ import { logoutUser } from "../../actions/authActions";
 import Navbar from "../layout/Navbar";
 import Sidebar from "../layout/Sidebar";
 import Board from "../dashboard/Board";
-
-import BugList from "./BugList";
+import { getBugs } from "../../actions/bugActions";
+import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import axios from 'axios';
 import { Switch, Route, withRouter } from "react-router";
+import CreateModal from "./CreateModal";
 
 class Dashboard extends Component {
   onLogoutClick = (e) => {
@@ -15,9 +18,38 @@ class Dashboard extends Component {
     this.props.logoutUser();
   };
 
+  componentDidMount() {
+    this.props.getBugs();
+  };
+
+  onDeleteClick = (id) => {
+    // this.props.deleteBug(id);
+    console.log(id);
+    axios
+      .delete(`api/bugs/delete/${id}`)
+      .then(     
+          (response) => {
+          console.log(response);
+          },
+          (error) => {
+          console.log(error);
+          }
+      );
+    console.log(id);
+    
+    this.props.getBugs(id);
+
+  };
+
   render() {
     const { user } = this.props.auth;
-    const { bugs } = this.props;
+    const bugItem = this.props.bugs;
+    const bugItems = this.props.bugs.map(bug =>(
+      <div key={bug.id}>
+        <h3>{bug.summary}</h3>
+        <p>{bug.description}</p>
+      </div>
+    ));
 
     return (
       <div className="dashboard">
@@ -26,6 +58,28 @@ class Dashboard extends Component {
 
           <Route exact path="/board" exact component={Board} />
         </Switch>
+        <Container style={{marginLeft: "20rem"}}>
+          <h1>Bugs</h1>
+          <CreateModal />
+          <ListGroup>
+            <TransitionGroup>
+              {bugItem.map(({ _id, name }) => (
+                <CSSTransition key={_id} timeout={100} classNames="fade">
+                  <ListGroupItem >
+                    <Button 
+                      className="remove-btn"
+                      color="danger"
+                      size="sm"
+                      onClick={this.onDeleteClick.bind(this, _id)}>&times;</Button>
+                  
+                      {name}
+                  </ListGroupItem>
+                </CSSTransition>
+              ))}
+
+            </TransitionGroup>      
+          </ListGroup>
+        </Container>
 
         {/* <button
           style={{
@@ -44,6 +98,12 @@ class Dashboard extends Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getBugs: (id) => dispatch(getBugs(id))
+  }
+}
+
 Dashboard.propTypes = {
   logoutUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
@@ -51,6 +111,7 @@ Dashboard.propTypes = {
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  bugs: state.bugs.bugs
 });
 
-export default connect(mapStateToProps, { logoutUser })(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

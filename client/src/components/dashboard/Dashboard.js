@@ -63,7 +63,7 @@ class Dashboard extends Component {
           <CreateModal />
           <ListGroup>
             <TransitionGroup>
-              {bugItem.map(({ _id, name }) => (
+              {bugItem.map(({ _id, name, description, date }) => (
                 <CSSTransition key={_id} timeout={100} classNames="fade">
                   <ListGroupItem >
                     <Button 
@@ -72,7 +72,9 @@ class Dashboard extends Component {
                       size="sm"
                       onClick={this.onDeleteClick.bind(this, _id)}>&times;</Button>
                   
-                      {name}
+                      <b>Name:</b> {name} &emsp;
+                      <b>Description:</b> {description} &emsp;
+                      <b>Date:</b> {date} &emsp;
                   </ListGroupItem>
                 </CSSTransition>
               ))}

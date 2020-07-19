@@ -10,8 +10,8 @@ class Sidebar extends Component {
     // NOTE: You also need to provide styles, see https://github.com/negomi/react-burger-menu#styling
     return (
       <Menu>
-        <a id="home" className="menu-item" href="/">
-          Profile
+        <a id="home" className="menu-item" href="/dashboard">
+          Dashboard
         </a>
         <a id="about" className="menu-item" href="/board">
           Board
@@ -20,7 +20,7 @@ class Sidebar extends Component {
           Contact
         </a>
         <a onClick={this.showSettings} className="menu-item--small" href="">
-          Project Settings
+          Settings
         </a>
       </Menu>
     );

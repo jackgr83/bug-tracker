@@ -8,6 +8,7 @@ const Board = () => {
   const [bugs, setBugs] = useState([])
   const [mounted, isMounted] = useState(false)
   const [columns, setColumns] = useState({})
+  const [status, setStatus] = useState({})
 
   useEffect(() => {
     const fetchBugs = async () => {
@@ -47,7 +48,12 @@ const Board = () => {
       const sourceItems = [...sourceColumn.items]
       const destItems = [...destColumn.items]
       const [removed] = sourceItems.splice(source.index, 1)
+      
       destItems.splice(destination.index, 0, removed)
+      setStatus({
+        status: destColumn.name,
+        bug: source.index
+      })
       setColumns({
         ...columns,
         [source.droppableId]: {
@@ -72,9 +78,7 @@ const Board = () => {
           items: copiedItems
         }
       })
-    }
-    console.log(columns[source.droppableId].items)
-    
+    }    
   }
   
   return (
@@ -118,6 +122,7 @@ const Board = () => {
                                 minHeight: '50px',
                                 backgroundColor: snapshot.isDragging ? '#2634B4A' : '#456C86',
                                 color: 'white',
+                                textAlign: 'center',
                                 ...provided.draggableProps.style
                               }}
                               >

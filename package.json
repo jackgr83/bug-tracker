@@ -1,25 +1,25 @@
 {
-  "name": "bugtracker-clone",
+  "name": "bug-tracker",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dannybuii/BugTracker-Clone.git"
+    "url": "git+https://github.com/jackgr83/bug-tracker.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dannybuii/BugTracker-Clone/issues"
+    "url": "https://github.com/jackgr83/bug-tracker"
   },
-  "homepage": "https://github.com/dannybuii/BugTracker-Clone#readme",
+  "homepage": "https://github.com/jackgr83/bug-tracker",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",

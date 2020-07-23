@@ -5,6 +5,11 @@
 /.pnp
 .pnp.js
 
+# config
+/config
+keys.js
+passport.js
+
 # testing
 /coverage
 
